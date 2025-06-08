@@ -3,28 +3,32 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Romantik Mektup & Müzik</title>
+<title>Romantik Site</title>
 <link rel="stylesheet" href="style.css" />
 </head>
 <body>
 
-<div id="starfield"></div>
+<div id="container">
 
-<div class="container">
-  <div id="heart-container">
-    <div id="heart">
-      <div id="envelope" title="Mektuba tıkla!">💌</div>
+  <button id="startBtn">Başlat</button>
+
+  <div id="heartsContainer" class="hidden"></div>
+
+  <div id="letter" class="hidden">
+    <div id="letterFront" class="letter-face">
+      <img src="https://i.imgur.com/V6bZqx7.png" alt="Mektup" />
+      <p>Mektuba Tıkla 💌</p>
+    </div>
+    <div id="letterBack" class="letter-face hidden">
+      <p id="loveQuote"></p>
     </div>
   </div>
 
-  <div id="message" class="hidden">
-    <p>“Sen benim hayatımdaki en güzel melodisin. Her saniye kalbimde çalıyorsun.”</p>
-  </div>
-
-  <button id="startBtn">Başlat</button>
 </div>
 
-<audio id="music" src="romantic.mp3" preload="auto"></audio>
+<audio id="bgMusic" loop>
+  <source src="https://orangefreesounds.com/wp-content/uploads/2025/04/Emotional-romantic-piano-music.mp3" type="audio/mpeg" />
+</audio>
 
 <script src="script.js"></script>
 </body>
