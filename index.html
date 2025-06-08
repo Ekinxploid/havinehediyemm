@@ -1,23 +1,31 @@
 <!DOCTYPE html>
 <html lang="tr">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Seninle 💖</title>
-  <link rel="stylesheet" href="assets/css/style.css" />
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Romantik Mektup & Müzik</title>
+<link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <div class="container">
-    <h1>Havin, seni çok seviyorum 💖</h1>
-    <p>Bu site sadece sana özel hazırlandı.</p>
+
+<div id="starfield"></div>
+
+<div class="container">
+  <div id="heart-container">
+    <div id="heart">
+      <div id="envelope" title="Mektuba tıkla!">💌</div>
+    </div>
   </div>
 
-  <button id="playButton">🎵 Müziği Başlat</button>
+  <div id="message" class="hidden">
+    <p>“Sen benim hayatımdaki en güzel melodisin. Her saniye kalbimde çalıyorsun.”</p>
+  </div>
 
-  <audio id="bgMusic" loop>
-    <source src="assets/audio/romantic.mp3" type="audio/mpeg" />
-  </audio>
+  <button id="startBtn">Başlat</button>
+</div>
 
-  <script src="assets/js/script.js"></script>
+<audio id="music" src="romantic.mp3" preload="auto"></audio>
+
+<script src="script.js"></script>
 </body>
 </html>
