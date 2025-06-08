@@ -1,30 +1,58 @@
-document.addEventListener("DOMContentLoaded", () => {
-  const stars = document.querySelectorAll(".star");
-  const messageBox = document.getElementById("message-box");
-  const finalMessage = document.getElementById("final-message");
-  let clickedStars = 0;
+// Basit yıldız efekti
+const starfield = document.getElementById("starfield");
 
-  // Yıldızları rastgele konumlandır
-  stars.forEach(star => {
-    star.style.top = Math.random() * 80 + 10 + "%";
-    star.style.left = Math.random() * 90 + 5 + "%";
+function createStar() {
+  const star = document.createElement("div");
+  star.classList.add("star");
+  const size = Math.random() * 2 + 1;
+  star.style.width = size + "px";
+  star.style.height = size + "px";
+  star.style.top = Math.random() * window.innerHeight + "px";
+  star.style.left = Math.random() * window.innerWidth + "px";
+  star.style.opacity = Math.random();
+  star.style.position = "absolute";
+  star.style.background = "white";
+  star.style.borderRadius = "50%";
+  star.style.animation = `twinkle ${2 + Math.random() * 3}s ease-in-out infinite`;
+  starfield.appendChild(star);
 
-    star.addEventListener("click", () => {
-      if (star.classList.contains("clicked")) return;
+  setTimeout(() => {
+    star.remove();
+  }, 8000);
+}
 
-      const msg = star.getAttribute("data-msg");
-      messageBox.textContent = msg;
-      messageBox.classList.remove("hidden");
+setInterval(createStar, 200);
 
-      star.classList.add("clicked");
-      clickedStars++;
+// Yıldızlar animasyonu için CSS keyframe ekliyoruz:
+const style = document.createElement("style");
+style.textContent = `
+@keyframes twinkle {
+  0%, 100% {opacity: 1;}
+  50% {opacity: 0.3;}
+}`;
+document.head.appendChild(style);
 
-      if (clickedStars === stars.length) {
-        setTimeout(() => {
-          messageBox.classList.add("hidden");
-          finalMessage.classList.remove("hidden");
-        }, 1500);
-      }
-    });
-  });
+// DOM elementleri
+const heart = document.getElementById("heart");
+const envelope = document.getElementById("envelope");
+const message = document.getElementById("message");
+const startBtn = document.getElementById("startBtn");
+const music = document.getElementById("music");
+
+let opened = false;
+
+// Başlat butonuna basınca müzik başlar, mektup aktif olur
+startBtn.addEventListener("click", () => {
+  music.play();
+  startBtn.style.display = "none";
+  envelope.style.cursor = "pointer";
+});
+
+// Mektuba tıklayınca açılır ve mesaj çıkar
+envelope.addEventListener("click", () => {
+  if (!opened) {
+    heart.classList.add("open");
+    message.classList.add("visible");
+    opened = true;
+  }
 });
