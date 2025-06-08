@@ -1,0 +1,123 @@
+/* Temel ayarlar */
+body, html {
+  margin: 0; padding: 0;
+  height: 100%;
+  background: linear-gradient(135deg, #1a1a2e, #16213e);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  user-select: none;
+  overflow: hidden;
+  text-align: center;
+}
+
+/* Yıldızlar */
+#starfield {
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  top: 0; left: 0;
+  z-index: 0;
+  background: transparent;
+}
+
+/* Kalp */
+#heart-container {
+  perspective: 600px;
+  margin-bottom: 20px;
+  z-index: 2;
+}
+
+#heart {
+  width: 180px;
+  height: 180px;
+  position: relative;
+  background: linear-gradient(135deg, #ff416c, #ff4b2b);
+  transform: rotate(-45deg);
+  border-radius: 0 0 30% 30%;
+  box-shadow: 0 0 20px rgba(255,75,43,0.7);
+  cursor: pointer;
+  transition: transform 0.5s ease;
+}
+
+#heart:hover {
+  transform: rotate(-45deg) scale(1.05);
+}
+
+/* Kalp yuvarlakları */
+#heart::before,
+#heart::after {
+  content: "";
+  width: 180px;
+  height: 180px;
+  background: linear-gradient(135deg, #ff416c, #ff4b2b);
+  border-radius: 50%;
+  position: absolute;
+  box-shadow: 0 0 20px rgba(255,75,43,0.7);
+}
+
+#heart::before {
+  top: -90px;
+  left: 0;
+}
+
+#heart::after {
+  top: 0;
+  left: 90px;
+}
+
+/* Mektup ikonu */
+#envelope {
+  position: absolute;
+  top: 55%;
+  left: 50%;
+  transform: translate(-50%, -50%) rotate(45deg);
+  font-size: 60px;
+  user-select: none;
+  transition: transform 0.7s ease;
+}
+
+/* Mektup açılınca döndürme animasyonu */
+.open #envelope {
+  transform: translate(-50%, -50%) rotate(0deg) scale(1.2);
+}
+
+/* Mesaj kutusu */
+#message {
+  max-width: 320px;
+  margin-top: 20px;
+  font-size: 20px;
+  line-height: 1.4;
+  font-style: italic;
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+#message.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Başlat butonu */
+button#startBtn {
+  background: #ff416c;
+  color: white;
+  border: none;
+  padding: 12px 28px;
+  border-radius: 30px;
+  font-size: 18px;
+  font-weight: 600;
+  margin-top: 30px;
+  cursor: pointer;
+  box-shadow: 0 4px 10px rgba(255,65,108,0.6);
+  transition: background 0.3s ease;
+  z-index: 2;
+}
+
+button#startBtn:hover {
+  background: #ff6a8a;
+}
