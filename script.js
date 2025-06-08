@@ -1,58 +1,73 @@
-// Basit yıldız efekti
-const starfield = document.getElementById("starfield");
+const startBtn = document.getElementById('startBtn');
+const heartsContainer = document.getElementById('heartsContainer');
+const letter = document.getElementById('letter');
+const letterFront = document.getElementById('letterFront');
+const letterBack = document.getElementById('letterBack');
+const loveQuote = document.getElementById('loveQuote');
+const bgMusic = document.getElementById('bgMusic');
 
-function createStar() {
-  const star = document.createElement("div");
-  star.classList.add("star");
-  const size = Math.random() * 2 + 1;
-  star.style.width = size + "px";
-  star.style.height = size + "px";
-  star.style.top = Math.random() * window.innerHeight + "px";
-  star.style.left = Math.random() * window.innerWidth + "px";
-  star.style.opacity = Math.random();
-  star.style.position = "absolute";
-  star.style.background = "white";
-  star.style.borderRadius = "50%";
-  star.style.animation = `twinkle ${2 + Math.random() * 3}s ease-in-out infinite`;
-  starfield.appendChild(star);
+const quotes = [
+  "Seni her gün daha çok seviyorum.",
+  "Kalbim sadece senin için atıyor.",
+  "Sen benim en güzel hikayemsin.",
+  "Birlikte olduğumuz her an sonsuz mutluluk.",
+  "Aşkımız yıldızlar kadar parlak.",
+  "Sen benim hayatımın en güzel sürprizisin.",
+  "Seninle her şey daha anlamlı.",
+  "Sonsuza kadar seninle olmak istiyorum.",
+  "Seninle her gün bir masal gibi.",
+  "Kalbim sana ait, hep öyle kalacak."
+];
 
-  setTimeout(() => {
-    star.remove();
-  }, 8000);
+let heartsInterval;
+let heartCount = 0;
+
+startBtn.addEventListener('click', () => {
+  bgMusic.play();
+  startBtn.classList.add('hidden');
+  heartsContainer.classList.remove('hidden');
+  letter.classList.remove('hidden');
+  startHearts();
+});
+
+function startHearts() {
+  heartsInterval = setInterval(() => {
+    createHeart();
+  }, 400);
 }
 
-setInterval(createStar, 200);
+function createHeart() {
+  const heart = document.createElement('div');
+  heart.classList.add('heart');
 
-// Yıldızlar animasyonu için CSS keyframe ekliyoruz:
-const style = document.createElement("style");
-style.textContent = `
-@keyframes twinkle {
-  0%, 100% {opacity: 1;}
-  50% {opacity: 0.3;}
-}`;
-document.head.appendChild(style);
+  // Rastgele başlangıç konumu (yatay)
+  heart.style.left = Math.random() * 90 + '%';
 
-// DOM elementleri
-const heart = document.getElementById("heart");
-const envelope = document.getElementById("envelope");
-const message = document.getElementById("message");
-const startBtn = document.getElementById("startBtn");
-const music = document.getElementById("music");
+  // Rastgele animasyon süresi (4-7 saniye arası)
+  heart.style.animationDuration = (4 + Math.random() * 3) + 's';
 
-let opened = false;
+  heartsContainer.appendChild(heart);
 
-// Başlat butonuna basınca müzik başlar, mektup aktif olur
-startBtn.addEventListener("click", () => {
-  music.play();
-  startBtn.style.display = "none";
-  envelope.style.cursor = "pointer";
-});
+  // Kalp animasyon tamamlanınca sil
+  heart.addEventListener('animationend', () => {
+    heart.remove();
+  });
+}
 
-// Mektuba tıklayınca açılır ve mesaj çıkar
-envelope.addEventListener("click", () => {
-  if (!opened) {
-    heart.classList.add("open");
-    message.classList.add("visible");
-    opened = true;
+// Mektuba tıklanınca
+letter.addEventListener('click', () => {
+  // Mektup açma animasyonu
+  letter.classList.toggle('flip');
+
+  // Yeni söz göster
+  if (letter.classList.contains('flip')) {
+    showRandomQuote();
+  } else {
+    loveQuote.textContent = '';
   }
 });
+
+function showRandomQuote() {
+  const randomIndex = Math.floor(Math.random() * quotes.length);
+  loveQuote.textContent = quotes[randomIndex];
+}
